@@ -1,0 +1,12 @@
+<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="100" fill="black" />
+  <!-- Background VM -->
+  <text x="100" y="80" font-family="Georgia, serif" font-size="75" fill="white" font-weight="bold" text-anchor="middle">V M</text>
+  <!-- Cutout for text -->
+  <rect x="10" y="42" width="180" height="18" fill="black" />
+  <!-- Lines -->
+  <line x1="15" y1="42" x2="185" y2="42" stroke="white" stroke-width="1.5" />
+  <line x1="15" y1="60" x2="185" y2="60" stroke="white" stroke-width="1.5" />
+  <!-- Foreground text -->
+  <text x="100" y="55" font-family="Arial, sans-serif" font-size="14" fill="white" font-weight="900" text-anchor="middle" letter-spacing="1.5">VISHNU MOBILES</text>
+</svg>
