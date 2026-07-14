@@ -6,10 +6,32 @@ import { toast } from "sonner";
 import { motion } from "framer-motion";
 
 export function DownloadPage() {
-  const handleDownload = () => {
+  const triggerDownload = (version: string) => {
+    if (version === "2.3.1") {
+      toast("Redirecting to Download", {
+        description: "Opening Google Drive download link for VishnuBilling_v2.3.1.apk…",
+      });
+      window.open("https://drive.google.com/uc?export=download&id=1pmNI24Mez2FfqkkEeLJv-B1-rJSVvYHf", "_blank");
+      return;
+    }
+
+    const filename = `VishnuBilling_v${version}.apk`;
+    const filepath = `/downloads/${filename}`;
+
     toast("Download Started", {
-      description: "VishnuBilling_v2.3.1.apk is downloading…",
+      description: `${filename} is downloading…`,
     });
+
+    const link = document.createElement("a");
+    link.href = filepath;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleDownload = () => {
+    triggerDownload("2.3.1");
   };
 
   const previousVersions = [
@@ -132,7 +154,7 @@ export function DownloadPage() {
                       variant="ghost"
                       size="sm"
                       className="text-primary hover:text-primary hover:bg-primary/10"
-                      onClick={() => toast("Downloading v" + v.version)}
+                      onClick={() => triggerDownload(v.version)}
                     >
                       Download
                     </Button>

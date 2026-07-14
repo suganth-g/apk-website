@@ -1,16 +1,30 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Lock, User, ArrowLeft } from "lucide-react";
+import { Lock, ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
+import { useState } from "react";
 
 export function LoginPage() {
   const navigate = useNavigate();
+  const [password, setPassword] = useState("");
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!password.trim()) {
+      toast.error("Please enter your password");
+      return;
+    }
+    
+    if (password !== "is@#Vishnu0515121998") {
+      toast.error("Invalid password", {
+        description: "The password you entered is incorrect.",
+      });
+      return;
+    }
+
     toast.success("Login successful!", {
       description: "Welcome back to Vishnu Mobile Shop Admin Portal.",
     });
@@ -34,25 +48,15 @@ export function LoginPage() {
             <div className="bg-primary/10 w-12 h-12 rounded-xl flex items-center justify-center mb-2">
               <Lock className="h-6 w-6 text-primary" />
             </div>
-            <CardTitle className="text-2xl font-bold">Staff Login</CardTitle>
+            <CardTitle className="text-2xl font-bold">
+              Welcome to Vishnushop
+            </CardTitle>
             <CardDescription className="text-gray-500">
-              Only authorized Owner and Staff members can access this portal.
+              Please enter the password to access the portal.
             </CardDescription>
           </CardHeader>
           <CardContent className="px-8 pb-8">
             <form onSubmit={handleLogin} className="space-y-5">
-              <div className="space-y-2">
-                <Label htmlFor="username">Username</Label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                  <Input
-                    id="username"
-                    placeholder="Enter your username"
-                    required
-                    className="pl-9 bg-gray-50 border-gray-200 focus:bg-white transition-colors"
-                  />
-                </div>
-              </div>
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <div className="relative">
@@ -60,14 +64,17 @@ export function LoginPage() {
                   <Input
                     id="password"
                     type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
                     required
                     className="pl-9 bg-gray-50 border-gray-200 focus:bg-white transition-colors"
+                    autoFocus
                   />
                 </div>
               </div>
               <Button type="submit" className="w-full rounded-xl h-12 text-base shadow-lg shadow-primary/20">
-                Login to Portal
+                Login <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </form>
           </CardContent>
